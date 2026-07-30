@@ -1,26 +1,22 @@
 class Solution {
     public int majorityElement(int[] nums) {
-      int candidate = 0, count = 0;
+       int ans = 0;
+       HashMap<Integer, Integer> map = new HashMap<>();
 
-      for(int num : nums){
-       
-        // Agar count 0 ho gaya
-        // to naya candidate choose karo
-            if (count == 0) {
-            candidate = num;
-            }
-
-            // Same candidate mila to vote badhao
-            if (num == candidate) {
-                count++;
-            }
-            
-            // Different mila to vote ghatao
-            else {
-                count--;
-            }
+       for(int num: nums){
+        map.put(num, map.getOrDefault(num, 0) + 1);
        }
-       return candidate;
+
+       int limit = 0;
+
+       for(int num : map.keySet()){
+            if (map.get(num) > limit) {
+                limit = map.get(num);
+                ans = num;
+            }
+        }
+
+        return ans;
     }
 }
 
