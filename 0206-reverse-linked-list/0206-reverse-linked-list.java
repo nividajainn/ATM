@@ -10,22 +10,26 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        if (head == null || head.next == null) return head;
+       //recursive
+       if(head == null || head.next == null) return head;
+       ListNode a = head.next;
+       head.next = null;
+       ListNode b = reverseList(a);
+       a.next = head;
 
-         ListNode prev = null;
- //prev ko null se start karte hain, yeh reverse list ka pehla node banega.
-         ListNode temp = head;
- //temp ek temporary pointer hai jo abhi head pe set hai.
-         while (temp != null){
-            temp = head.next; 
-    // Pehle next node ko store kar lo temp mein
-            head.next = prev;
-    // Ab current node (head) ka next pointer ko prev pe point karwa do — yaani link ko reverse kar do. 
-            prev = head; 
-    // prev ko ab current node bana do.
-            head = temp;
-    // head ko aage le jao — next node pe       
-         }
-           return prev;
+       return b;
     }
+      /*  //iterative
+      
+       ListNode previous = null;
+       ListNode current = head;
+
+        while (current != null) {
+            ListNode next = current.next; // Save next node
+            current.next = previous;      // Reverse the link
+            previous = current;           // Move previous one step
+            current = next;               // Move current one step
+        }
+        return previous;
+    } */
 }
